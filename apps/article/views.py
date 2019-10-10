@@ -13,7 +13,7 @@ from user.models import UserProfile
 # 获取归档列表
 def get_archives_list(all_article):
     # 归档
-    first_article = Article.objects.all().order_by('id').first()
+    first_article = Article.objects.all().order_by('-add_time').first()
     # 取最早的一条数据作为对比数据
     year, month = first_article.add_time.year, first_article.add_time.month
     archives_list = []

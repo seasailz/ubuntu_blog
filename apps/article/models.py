@@ -26,3 +26,24 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=30, verbose_name='标签')
+    article = models.ManyToManyField(Article, through='ArticleTag')
+
+    class Meta:
+        verbose_name = '标签'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.tag
+
+
+class ArticleTag(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='文章')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, verbose_name='标签')
+
+    class Meta:
+        verbose_name = '文章标签'
+        verbose_name_plural = verbose_name

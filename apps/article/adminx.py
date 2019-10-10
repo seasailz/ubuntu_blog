@@ -2,7 +2,7 @@
 __date__ = '2019/9/18 10:30'
 
 import xadmin
-from article.models import Article
+from article.models import Article, Tag, ArticleTag
 
 
 class ArticleAdmin(object):
@@ -20,4 +20,16 @@ class ArticleAdmin(object):
     style_fields = {'content': 'ueditor'}
 
 
+class TagAdmin(object):
+    model_icon = 'fa fa-file-text-o'
+    list_display = ['tag']
+
+
+class ArticleTagAdmin(object):
+    model_icon = 'fa fa-file-text-o'
+    list_display = ['article', 'tag']
+
+
 xadmin.site.register(Article, ArticleAdmin)
+xadmin.site.register(Tag, TagAdmin)
+xadmin.site.register(ArticleTag, ArticleTagAdmin)
