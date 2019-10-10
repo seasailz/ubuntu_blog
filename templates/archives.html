@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="col-md-9">
+    <div class="scroll-box" data-spy="scroll" data-target="#myScrollspy" data-offset="10">
+        <h2 id="2019">2019</h2>
+        {% for article in all_article %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4><a href="{% url 'article:detail' article.id %}">{{ article.title }}</a></h4>
+                <p><time id="{{ article.add_time|date:'m' }}">{{ article.add_time|date:'Y年m月d日' }}</time> by <a href="#">{{ article.author.username }}</a></p>
+                <p>{{ article.introduce }}</p>
+            </div>
+        </div><!-- 文章列表 -->
+        {% endfor %}
+    </div>
+</div>
+<div class="col-md-3">
+    <nav id="myScrollspy">
+        <ul class="nav nav-stacked">
+            <li role="presentation" class="active">
+                <a href="#2019">2019年</a>
+                <ul class="nav">
+                    {% for archives in archives_list %}
+                    <li role="presentation">
+                        <a href="#0{{ archives.1 }}">{{ archives.1 }}月</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block custom_css %}
+<style>
+</style>
+{% endblock %}
+
+{% block custom_js %}
+<script>$('body').scrollspy({ target: '#myScrollspy' })</script>
+{% endblock %}

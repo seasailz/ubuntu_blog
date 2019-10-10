@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="col-md-9">
+    <ol class="breadcrumb">
+        <li><a href="{% url 'index' %}">首页</a></li>
+        <li class="active">文章详情</li>
+    </ol>
+
+    <div class="article-box">
+        <h3>{{ article.title }}</h3>
+        <p>日期：<time>{{ article.add_time }}</time> 作者：<a href="#">{{ article.author.username }}</a> 类型：{{ article.get_type_display }}</p>
+        <hr>
+        <div>
+            {% autoescape off %}
+            {{ article.content }}
+            {% endautoescape %}
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pager">
+            <li class="previous"><a href="{% url 'article:detail' previous_article.id %}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 上一篇：{{ previous_article.title }}</a></li>
+            <li class="next"><a href="{% url 'article:detail' next_article.id %}">{{ next_article.title }}：下一篇 <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">最新文章</h3>
+        </div>
+
+        <div class="panel-body">
+            <div><time>sssss</time></div>
+            <a href="#">aaaaa</a>
+            <p><a href="">ccccc</a></p>
+        </div>
+        <div class="panel-body">
+            <div><time>sssss</time></div>
+            <a href="#">aaaaa</a>
+            <p><a href="">ccccc</a></p>
+        </div>
+        <div class="panel-body">
+            <div><time>sssss</time></div>
+            <a href="#">aaaaa</a>
+            <p><a href="">ccccc</a></p>
+        </div>
+    </div><!-- panel-default 最新文章 -->
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+var height = $('.article-box').height()
+if(height < 200){
+    $('.docs-footer').css('paddingBottom', 100);
+}
+</script>
+{% endblock %}
