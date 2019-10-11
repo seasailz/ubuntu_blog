@@ -8,7 +8,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4><a href="{% url 'article:detail' article.id %}">{{ article.title }}</a></h4>
-                <p><time id="{{ article.add_time|date:'m' }}">{{ article.add_time|date:'Y年m月d日' }}</time> by <a href="#">{{ article.author.username }}</a></p>
+                <p><time id="{{ article.add_time|date:'n' }}">{{ article.add_time|date:'Y年m月d日' }}</time> by <a href="#">{{ article.author.username }}</a></p>
                 <p>{{ article.introduce }}</p>
             </div>
         </div><!-- 文章列表 -->
@@ -23,7 +23,7 @@
                 <ul class="nav">
                     {% for archives in archives_list %}
                     <li role="presentation">
-                        <a href="#0{{ archives.1 }}">{{ archives.1 }}月</a>
+                        <a href="#{{ archives.1 }}">{{ archives.1 }}月</a>
                     </li>
                     {% endfor %}
                 </ul>

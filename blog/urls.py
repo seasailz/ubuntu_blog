@@ -19,7 +19,7 @@ import xadmin
 from django.views.static import serve
 
 from blog.settings import MEDIA_ROOT, STATIC_ROOT
-from article.views import IndexView
+from article.views import IndexView, ArchivesView, ClassifyVIew
 from user.views import page_not_found, pag_error
 
 urlpatterns = [
@@ -29,7 +29,9 @@ urlpatterns = [
     path('user/', include('user.urls', namespace='user')),
     path('article/', include('article.urls', namespace='article')),
     # 归档
-    path('archives/', include('article.urls', namespace='archives')),
+    path('archives/', ArchivesView.as_view(), name='archives'),
+    # 分类
+    path('classify/', ClassifyVIew.as_view(), name='classify'),
 
     # ueditor
     path('ueditor/', include('DjangoUeditor.urls')),

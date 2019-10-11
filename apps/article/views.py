@@ -5,7 +5,7 @@ from django.views import View
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-from article.models import Article
+from article.models import Article, Tag
 from user.models import UserProfile
 # Create your views here.
 
@@ -60,12 +60,15 @@ class IndexView(View):
         archives_list = get_archives_list(all_article)
         # 导航栏active
         cur_page = 'index'
+        # 获取标签数
+        tags = Tag.objects.all()
         return render(request, 'index.html', {
             'user': user,
             'page_art': page_article,
             'new_article': new_article,
             'archives_list': archives_list,
-            'cur_page': cur_page
+            'cur_page': cur_page,
+            'tag_num': len(tags)
         })
 
 
@@ -107,3 +110,8 @@ class ArchivesView(View):
             'all_article': all_article,
             'cur_page': cur_page
         })
+
+
+class ClassifyVIew(View):
+    def get(self, request):
+        return render(request, 'classify.html', {})

@@ -5,6 +5,11 @@ import xadmin
 from article.models import Article, Tag, ArticleTag
 
 
+class ArticleTagInLine(object):
+    model = ArticleTag
+    extra = 0
+
+
 class ArticleAdmin(object):
     # 导航栏的icon
     model_icon = 'fa fa-file-text-o'
@@ -18,6 +23,7 @@ class ArticleAdmin(object):
     ordering = ['-add_time']
     # 指明content字段采用富文本样式
     style_fields = {'content': 'ueditor'}
+    inlines = [ArticleTagInLine]
 
 
 class TagAdmin(object):
