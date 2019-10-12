@@ -7,7 +7,6 @@ from article.models import Article, Tag, ArticleTag
 
 class ArticleTagInLine(object):
     model = ArticleTag
-    extra = 0
 
 
 class ArticleAdmin(object):
@@ -28,7 +27,7 @@ class ArticleAdmin(object):
 
 class TagAdmin(object):
     model_icon = 'fa fa-file-text-o'
-    list_display = ['tag']
+    list_display = ['tag', 'article']
 
 
 class ArticleTagAdmin(object):

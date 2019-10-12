@@ -25,8 +25,7 @@
             <ul class="nav navbar-nav">
                 <li {% if cur_page == "index" %}class="active"{% endif %}><a href="{% url 'index' %}">主页</a></li>
                 <li {% if cur_page == "archives" %}class="active"{% endif %}><a href="{% url 'archives' %}">归档</a></li>
-                <li><a href="#">分类</a></li>
-                <li><a href="#">简介</a></li>
+                <li {% if cur_page == "classify" %}class="active"{% endif %}><a href="{% url 'classify' %}">分类</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <div class="input-group">
@@ -109,7 +108,7 @@
                     {% if page_art.has_previous %}
                     <li><a href="?page={{ page_art.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                     {% else %}
-                    <li><a href="?page={{ page_art.number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="disabled"><span aria-label="Previous"><span aria-hidden="true">&laquo;</span></span></li>
                     {% endif %}
 
                     {% for pgm in page_art.paginator.page_range %}
@@ -128,12 +127,12 @@
                 </ul>
             </nav>
         </div><!-- col-md-5 分页 -->
-    </div><!-- blog-main -->
+    </div><!-- col-md-6 -->
 
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">最新文章</h3>
+                <h3 class="panel-title">热门文章</h3>
             </div>
             {% for article in new_article %}
             <div class="panel-body">

@@ -54,8 +54,8 @@ class IndexView(View):
         page = int(page)
         paginator = Paginator(all_article, 4, 2)
         page_article = paginator.page(page)
-        # 最新文章推荐
-        new_article = all_article[:4]
+        # 最热文章推荐
+        new_article = Article.objects.all().order_by('-click_num')[:4]
         # 获取归档列表
         archives_list = get_archives_list(all_article)
         # 导航栏active
@@ -91,6 +91,9 @@ class ArticleDetailView(View):
                 curr_article = article
                 previous_article = all_article[previous_index]
                 next_article = all_article[next_index]
+                break
+        curr_article.click_num += 1
+        curr_article.save()
         return render(request, 'article_detail.html', {
             'article': curr_article,
             'previous_article': previous_article,
@@ -114,4 +117,29 @@ class ArchivesView(View):
 
 class ClassifyVIew(View):
     def get(self, request):
-        return render(request, 'classify.html', {})
+        user = UserProfile.objects.all().first()
+        tags = Tag.objects.all()
+        all_article = Article.objects.all().order_by('-add_time')
+        # 筛选分类
+        classify = request.GET.get('classify', '')
+        if classify:
+            all_article = all_article.filter(type=classify)
+        # 筛选标签
+        tag = request.GET.get('tag', '')
+        if tag:
+            all_article = all_article.filter(tag__tag=tag)
+        # 获取分页
+        page = request.GET.get('page', 1)
+        page = int(page)
+        paginator = Paginator(all_article, 4, 2)
+        page_article = paginator.page(page)
+        # 导航栏active
+        cur_page = 'classify'
+        return render(request, 'classify.html', {
+            'user': user,
+            'tags': tags,
+            'page_art': page_article,
+            'cur_page': cur_page,
+            'classify': classify,
+            'mark': tag
+        })

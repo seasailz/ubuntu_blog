@@ -29,9 +29,9 @@ urlpatterns = [
     path('user/', include('user.urls', namespace='user')),
     path('article/', include('article.urls', namespace='article')),
     # 归档
-    path('archives/', ArchivesView.as_view(), name='archives'),
+    path('archives', ArchivesView.as_view(), name='archives'),
     # 分类
-    path('classify/', ClassifyVIew.as_view(), name='classify'),
+    path('classify', ClassifyVIew.as_view(), name='classify'),
 
     # ueditor
     path('ueditor/', include('DjangoUeditor.urls')),
