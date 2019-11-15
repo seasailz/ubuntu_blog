@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
+
 {% load staticfiles %}
+
 {% block custom_css %}<link rel="stylesheet" href="{% static 'css/classify.css' %}">{% endblock %}
+
 {% block content %}
 <div class="col-md-3">
     <div class="row">
@@ -66,7 +69,7 @@
         <div class="art-list">
             {% for article in page_art %}
             <div class="art-box">
-                <h4><a href="#">{{ article.title }}</a></h4>
+                <h4><a href="{% url 'article:detail' article.id %}">{{ article.title }}</a></h4>
                 <p><time>{{ article.add_time|date:'Y年m月d日' }}</time>by {{ user.username }}</p>
                 <span>
                     <span class="glyphicon glyphicon-list" aria-hidden="true"></span>

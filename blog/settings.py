@@ -51,10 +51,15 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     # ueditro
-    'DjangoUeditor'
+    'DjangoUeditor',
 ]
 # 继承AbstractUser需要
 AUTH_USER_MODEL = 'user.UserProfile'
+# 允许auth重载函数
+AUTHENTICATION_BACKENDS = (
+    'user.views.CustomBackend',
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
