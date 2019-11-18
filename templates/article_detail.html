@@ -29,25 +29,16 @@
 <div class="col-md-3">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">最新文章</h3>
+            <h3 class="panel-title">相关文章</h3>
         </div>
-
+        {% for article in relevant_article %}
         <div class="panel-body">
-            <div><time>sssss</time></div>
-            <a href="#">aaaaa</a>
-            <p><a href="">ccccc</a></p>
+            <div><time>{{ article.add_time }}</time></div>
+            <a href="{% url 'article:detail' article.id %}">{{ article.title }}</a>
+            <p><a style="pointer-events:none;">{{ article.author.username }}</a></p>
         </div>
-        <div class="panel-body">
-            <div><time>sssss</time></div>
-            <a href="#">aaaaa</a>
-            <p><a href="">ccccc</a></p>
-        </div>
-        <div class="panel-body">
-            <div><time>sssss</time></div>
-            <a href="#">aaaaa</a>
-            <p><a href="">ccccc</a></p>
-        </div>
-    </div><!-- panel-default 最新文章 -->
+        {% endfor %}
+    </div><!-- panel-default 相关文章 -->
 </div>
 {% endblock %}
 

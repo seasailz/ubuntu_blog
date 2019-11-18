@@ -60,9 +60,9 @@
         </ul>
         <ul>
             <li>标签：</li>
-            <li><a {% if mark == '' %}class="active"{% endif %} href="?tag=&classify={{ classify }}">全部</a></li>
+            <li><a {% if mark == '' %}class="active"{% endif %} href="?classify={{ classify }}&tag=">全部</a></li>
             {% for tag in tags %}
-            <li><a {% if mark == tag.tag %}class="active"{% endif %} href="?tag={{ tag.tag }}&classify={{ classify }}">{{ tag.tag }}</a></li>
+            <li><a {% if mark == tag.tag %}class="active"{% endif %} href="?classify={{ classify }}&tag={{ tag.tag }}">{{ tag.tag }}</a></li>
             {% endfor %}
         </ul>
         <hr>

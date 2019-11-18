@@ -6810,6 +6810,21 @@ nav ul.navbar-nav li.active{
   margin: 10px 25px;
 }
 
+div.col-md-6 > div > div > dl > dt,
+div.col-md-6 > div > div > dl > dd {
+  float: left;
+}
+div.col-md-6 > div > div > dl > dt {
+  margin: 0 8px 0 0;
+}
+div.col-md-6 > div > div > dl > div {
+  float: right;
+}
+div.col-md-6 > div > div > dl > dt > span.glyphicon,
+div.col-md-6 > div > div > dl > div > span.glyphicon {
+  color: #888080;
+}
+
 
 .article-box {
   background-color: white;

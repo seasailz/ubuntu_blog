@@ -37,18 +37,25 @@ def get_archives_list(all_article):
     return archives_list
 
 
+def search_key(key_words, all_article):
+    if key_words:
+        # __contains 作用类似以mysql的 like语句
+        # 加多一个 i 的作用是不区分大小写
+        obj_article = all_article.filter(Q(title__icontains=key_words) |
+                                         Q(content__icontains=key_words) |
+                                         Q(introduce__icontains=key_words))
+        return obj_article
+    else:
+        return all_article
+
+
 class IndexView(View):
     def get(self, request):
         all_article = Article.objects.all().order_by('-add_time')
         user = UserProfile.objects.all().first()
         # 关键词搜索
         key_words = request.GET.get('keywords', '')
-        if key_words:
-            # __contains 作用类似以mysql的 like语句
-            # 加多一个 i 的作用是不区分大小写
-            all_article = all_article.filter(Q(title__icontains=key_words) |
-                                             Q(content__icontains=key_words) |
-                                             Q(introduce__icontains=key_words))
+        all_article = search_key(key_words, all_article)
         # 获取分页
         page = request.GET.get('page', 1)
         page = int(page)
@@ -94,10 +101,14 @@ class ArticleDetailView(View):
                 break
         curr_article.click_num += 1
         curr_article.save()
+        # 相关文章推荐（根据标签
+        cur_tag = curr_article.articletag_set.first()
+        relevant_article = all_article.filter(articletag__tag=cur_tag.tag)
         return render(request, 'article_detail.html', {
             'article': curr_article,
             'previous_article': previous_article,
-            'next_article': next_article
+            'next_article': next_article,
+            'relevant_article': relevant_article[:4]
         })
 
 
@@ -115,11 +126,15 @@ class ArchivesView(View):
         })
 
 
+# 分类页
 class ClassifyVIew(View):
     def get(self, request):
         user = UserProfile.objects.all().first()
         tags = Tag.objects.all()
         all_article = Article.objects.all().order_by('-add_time')
+        # 关键词搜索
+        key_words = request.GET.get('keywords', '')
+        all_article = search_key(key_words, all_article)
         # 筛选分类
         classify = request.GET.get('classify', '')
         if classify:
