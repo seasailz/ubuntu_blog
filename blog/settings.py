@@ -26,9 +26,9 @@ sys.path.insert(1, os.path.join(BASE_DIR, 'extra_apps'))    # new
 SECRET_KEY = '^*4$($_29ll_qqt5*58qpv5qiv&mmf$p(k!yq93_m!jyc8lk8i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -145,13 +145,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 配置静态资源文件夹根路径
-STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, '/static/')
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'xadmin', 'static')
-]
+# STATICFILES_DIRS = [
+#     # os.path.join(BASE_DIR, '/static/')
+#     os.path.join(BASE_DIR, 'static'),
+#     os.path.join(BASE_DIR, 'xadmin', 'static')
+# ]
 
 # 配置后台文件上传存放的文件夹
 MEDIA_URL = '/media/'

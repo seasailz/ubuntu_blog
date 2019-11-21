@@ -119,10 +119,13 @@ class ArchivesView(View):
         archives_list = get_archives_list(all_article)
         # 导航栏active
         cur_page = 'archives'
+        # 隐藏搜索栏
+        display_search = 'none'
         return render(request, 'archives.html', {
             'archives_list': archives_list,
             'all_article': all_article,
-            'cur_page': cur_page
+            'cur_page': cur_page,
+            'display_search': display_search
         })
 
 

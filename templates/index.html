@@ -27,6 +27,9 @@
                 <li {% if cur_page == "archives" %}class="active"{% endif %}><a href="{% url 'archives' %}">归档</a></li>
                 <li {% if cur_page == "classify" %}class="active"{% endif %}><a href="{% url 'classify' %}">分类</a></li>
             </ul>
+            {% if display_search == 'none' %}
+            <form action="class="navbar-form navbar-right""></form>
+            {% else %}
             <form class="navbar-form navbar-right">
                 <div class="input-group">
                     <input id="SearchVal" type="text" class="form-control" placeholder="搜索标题 / 内容">
@@ -37,6 +40,7 @@
                     </span>
                 </div><!-- /input-group -->
             </form>
+            {% endif %}
         </nav>
     </div>
 </header>
