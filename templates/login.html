@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -13,6 +14,9 @@
         <input type="text" id="inputEmail" class="form-control" name="email"  placeholder="Email" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
+        <label>验证码</label>
+        <div id="captcha" style="display:inline-block;">{{ login_form.captcha }}</div>
+
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
@@ -31,5 +35,18 @@
         </span>
     </div>
 </div>
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.captcha').click(function(){
+            $.getJSON('/captcha/refresh/', function(result){
+                $('.captcha').attr('src', result['image_url']);
+                $('#id_captcha_0').val(result['key'])
+            })
+        })
+    })
+</script>
+
 </body>
 </html>

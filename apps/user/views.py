@@ -1,10 +1,11 @@
-from django.shortcuts import render
 from django.views import View
-from django.shortcuts import render_to_response
+from django.shortcuts import render, render_to_response
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
+
+import json
 
 from user.models import UserProfile
 from user.forms import LoginForm
@@ -28,7 +29,8 @@ class CustomBackend(ModelBackend):
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'login.html')
+        login_form = LoginForm()
+        return render(request, 'login.html', {'login_form': login_form})
 
     def post(self, request):
         # 表单验证
@@ -37,7 +39,6 @@ class LoginView(View):
         if login_form.is_valid():
             email = request.POST.get('email', '')
             password = request.POST.get('password', '')
-            print(email, password)
             # authenticate验证数据库是否正确，成功返回一个对象，否则返回none
             user = authenticate(username=email, password=password)
             if user is not None:
@@ -48,7 +49,7 @@ class LoginView(View):
                 from django.urls import reverse
                 return HttpResponseRedirect(reverse('index'))
             else:
-                return render(request, 'login.html', {'msg': '账号或密码不正确'})
+                return render(request, 'login.html', {'msg': '账号或密码不正确', 'login_form': login_form})
         else:
             return render(request, 'login.html', {'login_form': login_form})
 

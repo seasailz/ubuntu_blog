@@ -36,6 +36,10 @@ urlpatterns = [
     # ueditor
     path('ueditor/', include('DjangoUeditor.urls')),
 
+    # 验证码
+    re_path(r'^captcha/', include('captcha.urls')),
+    # path('user/refresh_captcha/', refresh_captcha),
+
     # 配置media路径，使网页的图片能从后台输出显示出来
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}, name='media'),
     # setting中设置 debug=False后，配置路径使静态文件能加载

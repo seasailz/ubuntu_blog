@@ -52,6 +52,9 @@ INSTALLED_APPS = [
 
     # ueditro
     'DjangoUeditor',
+
+    # 验证码
+    'captcha',
 ]
 # 继承AbstractUser需要
 AUTH_USER_MODEL = 'user.UserProfile'
@@ -156,3 +159,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 配置后台文件上传存放的文件夹
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# django_simple_captcha 验证码配置
+# 格式
+# CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_fields)s %(image)s'
+# 噪点样式
+CAPTCHA_NOISE_FUNCTIONS = (
+   # 'captcha.helpers.noise_null',   # 无样式
+   # 'captcha.helpers.noise_arcs',   # 线
+    'captcha.helpers.noise_dots',   # 点
+)
+# 图片大小
+CAPTCHA_IMAGE_SIZE = (80, 25)
+CAPTCHA_BACKGROUND_COLOR = '#ffffff'
+# 设置验证码的格式
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'   # 随机英文字母
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'  # 验证码为数字表达式
