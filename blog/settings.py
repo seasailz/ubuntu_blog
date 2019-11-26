@@ -151,9 +151,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 配置静态资源文件夹根路径
 # STATICFILES_DIRS = [
-#     # os.path.join(BASE_DIR, '/static/')
-#     os.path.join(BASE_DIR, 'static'),
-#     os.path.join(BASE_DIR, 'xadmin', 'static')
+    # os.path.join(BASE_DIR, '/static/')
+    # os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'xadmin', 'static')
 # ]
 
 # 配置后台文件上传存放的文件夹

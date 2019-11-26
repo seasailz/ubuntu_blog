@@ -1593,6 +1593,7 @@ pre code {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
+  width: 1170px !important;
 }
 @media (min-width: 768px) {
   .container {
