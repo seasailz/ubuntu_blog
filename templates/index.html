@@ -11,6 +11,9 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     {% block custom_css %}{% endblock %}
+    <style>
+    .highlighted{color: red;}
+</style>
 </head>
 
 <body>
@@ -30,11 +33,21 @@
             {% if display_search == 'none' %}
             <form class="navbar-form navbar-right"></form>
             {% else %}
-            <form class="navbar-form navbar-right">
+<!--            <form class="navbar-form navbar-right">-->
+<!--                <div class="input-group">-->
+<!--                    <input id="SearchVal" type="text" class="form-control" placeholder="搜索标题 / 内容">-->
+<!--                    <span class="input-group-btn">-->
+<!--                        <button id="SearchBtn" class="btn btn-default" type="button">-->
+<!--                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+<!--                        </button>-->
+<!--                    </span>-->
+<!--                </div>&lt;!&ndash; /input-group &ndash;&gt;-->
+<!--            </form>-->
+            <form class="navbar-form navbar-right" action="{% url 'haystack_search' %}" method="get">
                 <div class="input-group">
-                    <input id="SearchVal" type="text" class="form-control" placeholder="搜索标题 / 内容">
+                    <input name="q" id="SearchVal" type="text" class="form-control" placeholder="搜索标题 / 内容">
                     <span class="input-group-btn">
-                        <button id="SearchBtn" class="btn btn-default" type="button">
+                        <button id="SearchBtn" class="btn btn-default" type="submit">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
                     </span>
@@ -184,15 +197,15 @@
 
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
-<script type="text/javascript">
-$('#SearchBtn').on('click', function(){
-    var request_url = '';
-    var key_words = $('#SearchVal').val();
-    if(key_words==''){return}
-    else{request_url='?keywords='+key_words}
-    window.location.href = request_url
-});
-</script>
+<!--<script type="text/javascript">-->
+<!--$('#SearchBtn').on('click', function(){-->
+<!--    var request_url = '';-->
+<!--    var key_words = $('#SearchVal').val();-->
+<!--    if(key_words==''){return}-->
+<!--    else{request_url='?keywords='+key_words}-->
+<!--    window.location.href = request_url-->
+<!--});-->
+<!--</script>-->
 {% block custom_js %}
 <script>
 $('[data-toggle="popover"]').popover({

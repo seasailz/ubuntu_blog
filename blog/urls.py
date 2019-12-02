@@ -38,7 +38,9 @@ urlpatterns = [
 
     # 验证码
     re_path(r'^captcha/', include('captcha.urls')),
-    # path('user/refresh_captcha/', refresh_captcha),
+
+    # 搜索引擎
+    re_path(r'^search/', include('haystack.urls')),
 
     # 配置media路径，使网页的图片能从后台输出显示出来
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}, name='media'),

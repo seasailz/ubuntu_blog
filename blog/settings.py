@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # haystack搜索引擎
+    'haystack',
     # my applications
     'user',
     'article',
@@ -160,7 +161,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 # django_simple_captcha 验证码配置
 # 格式
 # CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_fields)s %(image)s'
@@ -176,3 +176,16 @@ CAPTCHA_BACKGROUND_COLOR = '#ffffff'
 # 设置验证码的格式
 # CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'   # 随机英文字母
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'  # 验证码为数字表达式
+
+# 搜索引擎配置,指定搜索引擎
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        # 'ENGINE': 'article.whoosh_cn_backend.WhooshEngine',
+        # 'PATH': os.path.join(BASE_DIR, 'whoosh_index')
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    }
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
